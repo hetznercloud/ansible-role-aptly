@@ -46,7 +46,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install ansible and molecule
-        run: pip3 install ansible "ansible-compat<4" molecule-hetznercloud
+        run: pip3 install ansible "ansible-compat<4" molecule-hetznercloud jmespath
 
       - uses: hetznercloud/tps-action@main
         with:
