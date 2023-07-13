@@ -1,0 +1,30 @@
+---
+- name: Import install tasks
+  ansible.builtin.import_tasks: install.yml
+
+- name: Import base tasks
+  ansible.builtin.import_tasks: base.yml
+
+- name: Import repository tasks
+  ansible.builtin.include_tasks: repository/main.yml
+  loop: "{{ aptly__repositories | flatten(levels=1) }}"
+  loop_control:
+    loop_var: aptly__repository
+
+- name: Fail if mirrors are defined but API is disabled
+  tags: [ mirror ]
+  ansible.builtin.assert:
+    that:
+      - aptly__api_enable is defined and aptly__api_enable
+    fail_msg: "API is not enabled but mirrors are defined. Please enable the API at least for local reachability"
+  when: aptly__mirrors is defined and aptly__mirrors | length > 0
+
+- name: Include base mirror tasks
+  tags: [ mirror ]
+  ansible.builtin.include_tasks:
+    file: mirror/main.yml
+    apply:
+      tags: mirror
+  loop: "{{ aptly__mirrors | flatten(levels=1) }}"
+  loop_control:
+    loop_var: aptly__mirror_base

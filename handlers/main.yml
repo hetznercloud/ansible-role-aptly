@@ -1,0 +1,22 @@
+---
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Enable aptly-api
+  ansible.builtin.systemd:
+    name: aptly-api.service
+    enabled: true
+
+- name: Restart aptly-api
+  ansible.builtin.systemd:
+    name: aptly-api.service
+    state: restarted
+
+- name: Refresh apt cache
+  ansible.builtin.apt:
+    update_cache: true
+  register: "register_apt_cache_update"
+  retries: 18
+  delay: 10
+  until: "not register_apt_cache_update.failed"
