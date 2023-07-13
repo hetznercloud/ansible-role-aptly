@@ -1,0 +1,28 @@
+---
+- name: Ensure apt key is present
+  tags: [ install ]
+  ansible.builtin.apt_key:
+    url: 'https://www.aptly.info/pubkey.txt'
+    state: present
+
+- name: Ensure aptly repository is present
+  tags: [ install ]
+  ansible.builtin.apt_repository:
+    repo: "deb http://repo.aptly.info {{ aptly__repo }} main"
+    filename: aptly
+    state: present
+  notify:
+    - Refresh apt cache
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Ensure aptly dependencies are present
+  tags: [ install ]
+  ansible.builtin.apt:
+    name:
+      - aptly
+      - bzip2
+      - gnupg2
+      - zstd
+    state: present
