@@ -46,7 +46,7 @@ jobs:
           python-version: "3.x"
 
       - name: Install ansible and molecule
-        run: pip3 install ansible jmespath 'molecule>=6.0,<7.0' 'https://github.com/ansible-community/molecule-hetznercloud/archive/main.zip'
+        run: pip3 install ansible jmespath 'molecule>=6.0,<7.0' 'molecule-hetznercloud>=2.0,<3.0'
 
       - uses: hetznercloud/tps-action@main
         with:
