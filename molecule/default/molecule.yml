@@ -6,17 +6,17 @@ dependency:
     role-file: molecule/requirements.yml
 
 driver:
-  name: hetznercloud
+  name: molecule_hetznercloud
 
 platforms:
-  - name: 'role-aptly-server-jammy-1'
-    server_type: 'cpx11'
-    image: 'ubuntu-22.04'
-    location: 'fsn1'
-  - name: 'role-aptly-server-bookworm-1'
-    server_type: 'cpx11'
-    image: 'debian-12'
-    location: 'fsn1'
+  - name: aptly-jammy-1
+    server_type: cpx11
+    image: ubuntu-22.04
+    location: fsn1
+  - name: aptly-bookworm-1
+    server_type: cpx11
+    image: debian-12
+    location: fsn1
 
 provisioner:
   name: ansible
