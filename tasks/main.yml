@@ -6,7 +6,11 @@
   ansible.builtin.import_tasks: base.yml
 
 - name: Import repository tasks
-  ansible.builtin.include_tasks: repository/main.yml
+  tags: [ repositories ]
+  ansible.builtin.include_tasks:
+    file: repository/main.yml
+    apply:
+      tags: repositories
   loop: "{{ aptly__repositories | flatten(levels=1) }}"
   loop_control:
     loop_var: aptly__repository
