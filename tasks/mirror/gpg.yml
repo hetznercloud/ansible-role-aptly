@@ -30,7 +30,7 @@
   tags: [ aptly-mirror-gpg ]
   ansible.builtin.shell: |
     set -o pipefail
-    echo "{{ lookup('ansible.builtin.url', item.url, split_lines=false) }}" |
+    curl -sL '{{ item.url }}' |
     {{ aptly__config.gpgProvider }} \
     --no-default-keyring --keyring {{ aptly__user_home_directory }}/.gnupg/trustedkeys.gpg \
     --batch --pinentry-mode loopback --import
