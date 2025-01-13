@@ -25,4 +25,5 @@
       - bzip2
       - gnupg2
       - zstd
+      - curl
     state: present
