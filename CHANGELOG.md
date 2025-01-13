@@ -1,11 +1,11 @@
-# For next release
+# Patch Release v1.0.2 (2025-01-13)
   * **jonas.keidel**
     * mirror: use curl instead of ansible.builtin.url
       
       Some keys are only available as binary and the echo lookup pipe does not
       work properly. Use curl instead.
 
-*Not released yet*
+*Released by Tan Siewert <tan.siewert@hetzner.com>*
 
 # Patch Release v1.0.1 (2023-12-18)
   * **Tom Siewert**
