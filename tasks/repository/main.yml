@@ -10,8 +10,10 @@
         aptly repo create -distribution="{{ aptly__repository.distribution }}" -component="{{ item }}" \
         -architectures="{{ aptly__repository.architectures | join(',') }}" \
         {{ aptly__repository.name }}-{{ item }}
+      vars:
+        create_dir: "{{ aptly__config.rootDir }}/public/{{ (aptly__repository.publish_prefix | default('')) + '/' }}dists"
       args:
-        creates: "{{ aptly__config.rootDir }}/public/dists/{{ aptly__repository.distribution }}/{{ item }}"
+        creates: "{{ create_dir }}/{{ aptly__repository.distribution }}/{{ item }}"
         executable: /bin/bash
       loop: "{{ aptly__repository.components | flatten(levels=1) }}"
       register: reg_aptly_repo_creation
@@ -23,7 +25,8 @@
         -component="{{ aptly__repository.components | join(',') }}" \
         {% if aptly__repository.origin is defined and aptly__repository.origin | length %}-origin="{{ aptly__repository.origin }}"{% endif %} \
         {% if aptly__repository.label is defined and aptly__repository.label | length %}-label="{{ aptly__repository.label }}"{% endif %} \
-        {{ [aptly__repository.name + '-'] | product(aptly__repository.components) | map('join') | list | join(' ') }}
+        {{ [aptly__repository.name + '-'] | product(aptly__repository.components) | map('join') | list | join(' ') }} \
+        {{ aptly__repository.publish_prefix | default('') }}
       args:
         creates: "{{ aptly__config.rootDir }}/public/dists/{{ aptly__repository.distribution }}/Release"
         executable: /bin/bash

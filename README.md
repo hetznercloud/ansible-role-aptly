@@ -114,6 +114,17 @@ aptly__repositories:
     architectures:
       - amd64
       - arm64
+  - name: hetzner-ceph-jammy
+    distribution: jammy
+    label: cloud_platform
+    publish_prefix: hetzner-ceph
+    state: present
+    components:
+      - main
+      - experimental
+    architectures:
+      - amd64
+      - arm64
 ```
 
 ## Example playbook

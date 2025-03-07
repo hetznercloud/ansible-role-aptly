@@ -1,3 +1,9 @@
+# For next release
+  * **Tan Siewert**
+    * repository: add missing publish_prefix option
+
+*Not released yet*
+
 # Patch Release v1.0.2 (2025-01-13)
   * **jonas.keidel**
     * mirror: use curl instead of ansible.builtin.url
