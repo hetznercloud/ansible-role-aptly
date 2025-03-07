@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v1.0.3 (2025-03-07)
   * **Tan Siewert**
     * repository: add missing publish_prefix option
 
-*Not released yet*
+*Released by Tan Siewert <tan.siewert@hetzner.com>*
 
 # Patch Release v1.0.2 (2025-01-13)
   * **jonas.keidel**
