@@ -1,18 +1,21 @@
 ---
-- name: Ensure apt key is present
+- name: Add aptly repository
   tags: [ install ]
-  ansible.builtin.apt_key:
-    url: 'https://www.aptly.info/pubkey.txt'
-    state: present
+  when:
+    - aptly__add_repo
+  block:
+    - name: Ensure apt key is present
+      ansible.builtin.apt_key:
+        url: 'https://www.aptly.info/pubkey.txt'
+        state: present
 
-- name: Ensure aptly repository is present
-  tags: [ install ]
-  ansible.builtin.apt_repository:
-    repo: "deb http://repo.aptly.info {{ aptly__repo }} main"
-    filename: aptly
-    state: present
-  notify:
-    - Refresh apt cache
+    - name: Ensure aptly repository is present
+      ansible.builtin.apt_repository:
+        repo: "deb http://repo.aptly.info {{ aptly__repo }} main"
+        filename: aptly
+        state: present
+      notify:
+        - Refresh apt cache
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers

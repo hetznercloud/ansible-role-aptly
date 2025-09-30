@@ -1,3 +1,9 @@
+# For next release
+  * **haelekuin**
+    * install: add support for upstream debian/ubuntu repositories.
+
+*Not released yet*
+
 # Patch Release v1.0.3 (2025-03-07)
   * **Tan Siewert**
     * repository: add missing publish_prefix option
