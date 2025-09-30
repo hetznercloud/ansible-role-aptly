@@ -1,6 +1,8 @@
 # For next release
   * **haelekuin**
     * install: add support for upstream debian/ubuntu repositories.
+  * **Tan Siewert**
+    * mirror: skip "invalid" jinja on specific tasks
 
 *Not released yet*
 
