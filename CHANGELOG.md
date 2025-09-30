@@ -3,6 +3,7 @@
     * install: add support for upstream debian/ubuntu repositories.
   * **Tan Siewert**
     * mirror: skip "invalid" jinja on specific tasks
+    * role: add support for ansible 12 / 2.19
 
 *Not released yet*
 

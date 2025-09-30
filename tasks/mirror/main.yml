@@ -11,7 +11,7 @@
     mirror_children: true
   when:
     - aptly__mirror_base.childrens is defined
-    - aptly__mirror_base.childrens | length
+    - aptly__mirror_base.childrens | length > 0
   loop: "{{ aptly__mirror_base.childrens | flatten(levels=1) }}"
   loop_control:
     loop_var: aptly__mirror
@@ -21,7 +21,7 @@
   vars:
     mirror_name: "{{ aptly__mirror_base.name }}"
   when:
-    - aptly__mirror_base.childrens is defined and aptly__mirror_base.childrens | length
+    - aptly__mirror_base.childrens is defined and aptly__mirror_base.childrens | length > 0
     - aptly__mirror_base.state | default('present') == 'absent'
 
 - name: Ensure mirror base config is latest
