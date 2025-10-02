@@ -24,7 +24,7 @@
 
         - name: Remove publish
           ansible.builtin.command: "aptly publish drop {{ reg_matching_publish[0].Distribution }} {{ reg_matching_publish[0].Prefix }}"
-          when: reg_matching_publish is defined and reg_matching_publish
+          when: reg_matching_publish is defined and reg_matching_publish | length > 0
 
     - name: Snapshot tasks
       block:

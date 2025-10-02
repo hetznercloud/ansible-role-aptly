@@ -13,12 +13,12 @@ mirror_childrens:
 {% endfor %}
 {% endif %}
 mirror_distribution: '{{ aptly__mirror.distribution }}'
-{% if aptly__mirror_base.label is defined and aptly__mirror_base.label | length %}
+{% if aptly__mirror_base.label is defined and aptly__mirror_base.label | length > 0 %}
 mirror_label: '{{ aptly__mirror_base.label }}'
 {% endif %}
-{% if aptly__mirror_base.publish_prefix is defined and aptly__mirror_base.publish_prefix | length %}
+{% if aptly__mirror_base.publish_prefix is defined and aptly__mirror_base.publish_prefix | length > 0 %}
 mirror_prefix: '{{ aptly__mirror_base.publish_prefix }}'
 {% endif %}
-{% if aptly__mirror_base.origin is defined and aptly__mirror_base.origin | length %}
+{% if aptly__mirror_base.origin is defined and aptly__mirror_base.origin | length > 0 %}
 mirror_origin: '{{ aptly__mirror_base.origin }}'
 {% endif %}

@@ -25,7 +25,7 @@
           ansible.builtin.shell: |
             aptly mirror create \
             -architectures="{{ aptly__mirror.architectures | join(',') }}" \
-            {% if aptly__mirror.filter is defined and aptly__mirror.filter | length %}
+            {% if aptly__mirror.filter is defined and aptly__mirror.filter | length > 0 %}
             -filter='{{ aptly__mirror.filter }}' \
             {% if aptly__mirror.filter_with_deps is defined and aptly__mirror.filter_with_deps %}
             -filter-with-deps \
@@ -55,7 +55,7 @@
           ansible.builtin.shell: |
             aptly mirror edit \
             -architectures="{{ aptly__mirror.architectures | join(',') }}" \
-            {% if aptly__mirror.filter is defined and aptly__mirror.filter | length %}
+            {% if aptly__mirror.filter is defined and aptly__mirror.filter | length > 0 %}
             -filter='{{ aptly__mirror.filter }}' \
             {% if aptly__mirror.filter_with_deps is defined and aptly__mirror.filter_with_deps %}
             -filter-with-deps \

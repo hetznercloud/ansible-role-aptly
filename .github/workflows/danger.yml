@@ -13,10 +13,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Ruby 3.0
+      - name: Setup Ruby 3.3
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'
+          ruby-version: '3.3'
 
       - name: Configure cache
         uses: actions/cache@v4
@@ -27,7 +27,7 @@ jobs:
             ${{ runner.os }}-gems-
 
       - name: Run Danger
-        uses: MeilCli/danger-action@v5
+        uses: MeilCli/danger-action@v6
         with:
           plugins_file: 'Gemfile'
           install_path: 'vendor/bundle'

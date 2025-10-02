@@ -23,8 +23,8 @@
       ansible.builtin.shell: |
         aptly publish repo -batch -architectures="{{ aptly__repository.architectures | join(',') }}" \
         -component="{{ aptly__repository.components | join(',') }}" \
-        {% if aptly__repository.origin is defined and aptly__repository.origin | length %}-origin="{{ aptly__repository.origin }}"{% endif %} \
-        {% if aptly__repository.label is defined and aptly__repository.label | length %}-label="{{ aptly__repository.label }}"{% endif %} \
+        {% if aptly__repository.origin is defined and aptly__repository.origin | length > 0 %}-origin="{{ aptly__repository.origin }}"{% endif %} \
+        {% if aptly__repository.label is defined and aptly__repository.label | length > 0 %}-label="{{ aptly__repository.label }}"{% endif %} \
         {{ [aptly__repository.name + '-'] | product(aptly__repository.components) | map('join') | list | join(' ') }} \
         {{ aptly__repository.publish_prefix | default('') }}
       args:
