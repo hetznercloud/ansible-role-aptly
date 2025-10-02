@@ -1,11 +1,11 @@
-# For next release
-  * **haelekuin**
-    * install: add support for upstream debian/ubuntu repositories.
+# Minor Release v1.1.0 (2025-10-02)
   * **Tan Siewert**
     * mirror: skip "invalid" jinja on specific tasks
     * role: add support for ansible 12 / 2.19
+  * **haelekuin**
+    * install: add support for upstream debian/ubuntu repositories.
 
-*Not released yet*
+*Released by Tan Siewert <tan.siewert@hetzner.com>*
 
 # Patch Release v1.0.3 (2025-03-07)
   * **Tan Siewert**
