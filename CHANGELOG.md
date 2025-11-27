@@ -1,3 +1,9 @@
+# For next release
+  * **Tan Siewert**
+    * install: use new release repo
+
+*Not released yet*
+
 # Minor Release v1.1.0 (2025-10-02)
   * **Tan Siewert**
     * mirror: skip "invalid" jinja on specific tasks

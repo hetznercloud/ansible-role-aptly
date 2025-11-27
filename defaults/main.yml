@@ -1,5 +1,5 @@
 ---
-aptly__repo: squeeze
+aptly__repo: "release"
 aptly__add_repo: true
 
 aptly__become_method: ansible.builtin.su
