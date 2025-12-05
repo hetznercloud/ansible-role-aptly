@@ -4,6 +4,12 @@
   when:
     - aptly__add_repo
   block:
+    - name: Run setup to fetch distribution_release facts
+      ansible.builtin.setup:
+        gather_subset:
+          - "!all"
+          - "distribution_release"
+
     - name: Ensure apt key is present
       ansible.builtin.apt_key:
         url: 'https://www.aptly.info/pubkey.txt'
@@ -11,7 +17,7 @@
 
     - name: Ensure aptly repository is present
       ansible.builtin.apt_repository:
-        repo: "deb http://repo.aptly.info {{ aptly__repo }} main"
+        repo: "deb http://repo.aptly.info/{{ aptly__repo }} {{ ansible_distribution_release | lower }} main"
         filename: aptly
         state: present
       notify:

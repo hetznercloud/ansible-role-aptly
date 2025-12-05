@@ -22,10 +22,10 @@ aptly__add_repo: true
 By default, the role will add the upstream aptly repository. Set to `false` to use either the [Debian](https://packages.debian.org/search?searchon=names&keywords=aptly) or [Ubuntu](https://packages.ubuntu.com/search?suite=all&searchon=names&keywords=aptly) repositories.
 
 ``` yaml
-aptly__repo: 'squeeze'
+aptly__repo: 'release'
 ```
 
-When `aptly__add_repo` is `true`, the repository has to be either `squeeze` or `nightly`.
+When `aptly__add_repo` is `true`, the repository has to be either `release` or `ci`.
 
 ```yaml
 
