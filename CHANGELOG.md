@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v1.1.1 (2025-12-05)
   * **Tan Siewert**
     * install: use new release repo
 
-*Not released yet*
+*Released by Tan Siewert <tan.siewert@hetzner.com>*
 
 # Minor Release v1.1.0 (2025-10-02)
   * **Tan Siewert**
