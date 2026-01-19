@@ -1,3 +1,7 @@
+# Patch Release v1.1.2 (2026-01-27)
+ * **Johannes Starosta**
+    * Use keyring file instead of apt-key due to deprecation/removal of apt-key in recent Debian and Ubuntu releases
+
 # Patch Release v1.1.1 (2025-12-05)
   * **Tan Siewert**
     * install: use new release repo
