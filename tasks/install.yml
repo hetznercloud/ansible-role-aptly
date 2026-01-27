@@ -10,14 +10,16 @@
           - "!all"
           - "distribution_release"
 
-    - name: Ensure apt key is present
-      ansible.builtin.apt_key:
+    - name: Ensure aptly keyring is present
+      ansible.builtin.get_url:
         url: 'https://www.aptly.info/pubkey.txt'
-        state: present
+        dest: /etc/apt/keyrings/aptly.asc
+        mode: '0644'
+        force: true
 
     - name: Ensure aptly repository is present
       ansible.builtin.apt_repository:
-        repo: "deb http://repo.aptly.info/{{ aptly__repo }} {{ ansible_distribution_release | lower }} main"
+        repo: "deb [signed-by=/etc/apt/keyrings/aptly.asc] http://repo.aptly.info/{{ aptly__repo }} {{ ansible_distribution_release | lower }} main"
         filename: aptly
         state: present
       notify:
