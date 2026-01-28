@@ -9,14 +9,14 @@ driver:
   name: molecule_hetznercloud
 
 platforms:
-  - name: aptly-jammy-1
-    server_type: cpx11
-    image: ubuntu-22.04
-    location: fsn1
-  - name: aptly-bookworm-1
-    server_type: cpx11
-    image: debian-12
-    location: fsn1
+  - name: aptly-noble-1
+    server_type: cpx12
+    image: ubuntu-24.04
+    location: sin
+  - name: aptly-trixie-1
+    server_type: cpx12
+    image: debian-13
+    location: sin
 
 provisioner:
   name: ansible
