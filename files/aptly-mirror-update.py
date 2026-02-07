@@ -274,6 +274,27 @@ def get_arguments():
     return parser.parse_args()
 
 
+def publish_multi(client, sources, mirror_config, async_run: bool):
+    publish = Publish(client)
+    distribution = mirror_config.get("mirror_distribution")
+    prefix = mirror_config.get("mirror_prefix")
+    if publish.check_if_exists(name=distribution, prefix=prefix):
+        publish.switch_snapshot(
+            snapshots=sources,
+            prefix=prefix,
+            distribution=distribution,
+            async_run=async_run,
+        )
+    else:
+        publish.create_from_snapshot(
+            sources=sources,
+            distribution=distribution,
+            origin=mirror_config.get("mirror_origin"),
+            label=mirror_config.get("mirror_label"),
+            prefix=prefix,
+            async_run=async_run,
+        )
+
 def publish_mirror(client, mirror_name, mirror_config, current_day, async_run: bool):
     publish = Publish(client)
     distribution = mirror_config.get("mirror_distribution")
@@ -297,6 +318,7 @@ def publish_mirror(client, mirror_name, mirror_config, current_day, async_run: b
             distribution=distribution,
             async_run=async_run,
         )
+
     else:
         publish.create_from_snapshot(
             sources=[{"Name": f"{mirror_name}-{current_day}"}],
@@ -306,7 +328,6 @@ def publish_mirror(client, mirror_name, mirror_config, current_day, async_run: b
             prefix=mirror_config.get("mirror_prefix"),
             async_run=async_run,
         )
-
 
 def mirror_update_and_snapshot(client, mirror_name, current_day, async_run: bool):
     mirror = Mirror(client=client, mirror=mirror_name)
@@ -353,6 +374,7 @@ def main():
         mirror_config = yaml.safe_load(stream)
 
     if mirror_config.get("mirror_childrens"):
+        sources = []
         for children_mirror_name in mirror_config.get("mirror_childrens"):
             with open(f"/etc/aptly/mirror/{children_mirror_name}.conf.yaml") as stream:
                 children_mirror_config = yaml.safe_load(stream)
@@ -360,6 +382,12 @@ def main():
                 raise ValueError(
                     f"Children mirror {children_mirror_name} is not the parent of {mirror_name}"
                 )
+            components = ''
+            source = ''
+            if children_mirror_config.get("mirror_components"):
+                components = ','.join(children_mirror_config.get('mirror_components'))
+                source = { "Name": f"{children_mirror_name}-{current_day}", "Component": components }
+            sources.append(source)
 
             mirror_update_and_snapshot(
                 client, children_mirror_name, current_day, mirror_async
@@ -383,7 +411,10 @@ def main():
         parent_snapshot.merge(snapshots=snapshots, package_refs=packages)
 
         print("Switch publish to new snapshot")
-        publish_mirror(client, mirror_name, mirror_config, current_day, mirror_async)
+        if mirror_config.get("publish_children"):
+            publish_multi(client, sources, mirror_config, mirror_async)	
+        else:
+            publish_mirror(client, mirror_name, mirror_config, current_day, mirror_async)
 
         print("Delete all old snapshots")
         old_snapshot = Snapshot(client, f"{parent_snapshot_name}-old")
