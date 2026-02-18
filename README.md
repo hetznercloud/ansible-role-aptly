@@ -108,6 +108,37 @@ aptly__mirrors:
       - main
     keys:
       - url: ""
+  # Example for multi-component publishing.
+  # Note: Set only one component per repository see https://www.aptly.info/doc/feature/multi-component/
+  # Specifying multiple components is not expected to work
+  - name: openvox-noble
+    publish_prefix: openvox
+    no_block_mirror_task: true
+    origin: Vox Pupuli
+    label: openvox-ubuntu24.04
+    distribution: ubuntu24.04
+    publish_children: true
+    childrens:
+      - name: openvox7
+        distribution: ubuntu24.04
+        archive_url: https://apt.voxpupuli.org/
+        state: present
+        components:
+          - openvox7
+        architectures:
+          - amd64
+        keys:
+          - url: https://apt.voxpupuli.org/openvox-keyring.gpg
+      - name: openvox8
+        distribution: ubuntu24.04
+        archive_url: https://apt.voxpupuli.org/
+        state: present
+        components:
+          - openvox8
+        architectures:
+          - amd64
+        keys:
+          - url: https://apt.voxpupuli.org/openvox-keyring.gpg
 
 aptly__repositories:
   - name: jammy

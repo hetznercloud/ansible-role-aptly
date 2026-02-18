@@ -4,6 +4,9 @@
 {% if mirror_children is defined and mirror_children %}
 mirror_parent: '{{ aptly__mirror_base.name }}'
 {% endif %}
+{% if aptly__mirror_base.publish_children is defined and  publish_children is not defined %}
+publish_children: true
+{% endif %}
 {% if aptly__mirror_base.childrens is defined and mirror_children is not defined %}
 mirror_childrens:
 {% for children in aptly__mirror.childrens %}
@@ -12,6 +15,14 @@ mirror_childrens:
 {% endif %}
 {% endfor %}
 {% endif %}
+
+{% if aptly__mirror.components is defined and mirror_components is not defined %}
+mirror_components:
+{% for component in aptly__mirror.components %}
+  - '{{ component }}'
+{% endfor %}
+{% endif %}
+
 mirror_distribution: '{{ aptly__mirror.distribution }}'
 {% if aptly__mirror_base.label is defined and aptly__mirror_base.label | length > 0 %}
 mirror_label: '{{ aptly__mirror_base.label }}'
