@@ -300,10 +300,10 @@ def publish_mirror(client, mirror_name, mirror_config, current_day, async_run: b
     else:
         publish.create_from_snapshot(
             sources=[{"Name": f"{mirror_name}-{current_day}"}],
-            distribution=mirror_config.get("mirror_distribution"),
+            distribution=distribution,
             origin=mirror_config.get("mirror_origin"),
             label=mirror_config.get("mirror_label"),
-            prefix=mirror_config.get("mirror_prefix"),
+            prefix=prefix,
             async_run=async_run,
         )
 
