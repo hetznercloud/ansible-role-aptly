@@ -81,6 +81,7 @@
     - Reload systemd
 
 - name: Ensure mirror update script is latest
+  tags: [ mirror ]
   ansible.builtin.copy:
     src: aptly-mirror-update.py
     dest: /usr/local/bin/aptly-mirror-update

@@ -22,3 +22,9 @@ mirror_prefix: '{{ aptly__mirror_base.publish_prefix }}'
 {% if aptly__mirror_base.origin is defined and aptly__mirror_base.origin | length > 0 %}
 mirror_origin: '{{ aptly__mirror_base.origin }}'
 {% endif %}
+{% if aptly__mirror_base.architectures is defined and aptly__mirror_base.architectures | length > 0 %}
+mirror_architectures:
+{% for architecture in aptly__mirror_base.architectures %}
+  - {{ architecture }}
+{% endfor %}
+{% endif %}
