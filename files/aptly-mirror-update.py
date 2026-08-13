@@ -304,6 +304,7 @@ def publish_mirror(client, mirror_name, mirror_config, current_day, async_run: b
             origin=mirror_config.get("mirror_origin"),
             label=mirror_config.get("mirror_label"),
             prefix=prefix,
+            architectures=mirror_config.get("mirror_architectures"),
             async_run=async_run,
         )
 

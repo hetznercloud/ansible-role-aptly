@@ -1,7 +1,12 @@
 # For the next release
 
-  * ** Johannes Starosta**
+  * **Johannes Starosta**
      * Reuse variables instead reloading values from configuration in publish_mirror function in aptly-mirror-update.py
+  * **Jonas Keidel**
+     * Use specified architectures
+
+       Aptly seems to have issues determining the architecture if all packages
+       are `all`. We can now specify the architectures.
 
 # Patch Release v1.1.2 (2026-01-28)
   * **Johannes Starosta**
